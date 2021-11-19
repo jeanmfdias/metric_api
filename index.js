@@ -1,10 +1,17 @@
 const express = require('express');
+const consign = require('consign');
 const bodyParser = require('body-parser');
 
 const connection = require('./configs/database');
 const migrations = require('./configs/migrations');
 
 const app = express();
+
+app.use(bodyParser.json());
+
+consign()
+    .include('controllers')
+    .into(app);
 
 connection.connect(err => {
     if (err) {
@@ -17,19 +24,4 @@ connection.connect(err => {
 
         app.listen(3000,  () => console.log('Server running'));
     }
-});
-
-app.use(bodyParser.json());
-
-app.get('/v1', (req, res) => {
-    return res.json({
-        "data": "version 1.0.0 | metric api"
-    });
-});
-
-app.post('/v1/convert', (req, res) => {
-    return res.json({
-        "status": "success",
-        "data": req.body
-    });
 });
