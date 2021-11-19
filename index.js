@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const connection = require('./configs/database');
+const migrations = require('./configs/migrations');
 
 const app = express();
 
@@ -10,6 +11,9 @@ connection.connect(err => {
         console.log(err);
     } else {
         console.log('successful db connection');
+
+        migrations.init(connection);
+        migrations.criarLogsTable();
 
         app.listen(3000,  () => console.log('Server running'));
     }
