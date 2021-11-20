@@ -1,3 +1,4 @@
+const Moment = require('moment');
 const Log = require('../models/logs');
 
 module.exports = app => {
@@ -6,7 +7,8 @@ module.exports = app => {
         let new_value = null;
         let result = {
             "status": "success",
-            "data" : ""
+            "data" : "",
+            "executed_at": Moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
         if (body.unit_in == "M" && body.unit_out == "K") {
@@ -21,7 +23,8 @@ module.exports = app => {
             "alias": "conversion",
             "value": "conversion",
             "input": JSON.stringify(body),
-            "output": JSON.stringify(result)
+            "output": JSON.stringify(result),
+            "created_at": Moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
         Log.create(log);

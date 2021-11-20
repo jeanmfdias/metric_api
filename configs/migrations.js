@@ -9,7 +9,8 @@ class Migrations {
             'alias varchar(255), ' +
             'value varchar(255), ' +
             'input TEXT, ' +
-            'output TEXT, ' + 
+            'output TEXT, ' +
+            'created_at DATETIME, ' + 
             'PRIMARY KEY(id)' +
         ')';
 
