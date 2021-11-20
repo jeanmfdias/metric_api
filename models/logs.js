@@ -2,14 +2,16 @@ const connection = require('../configs/database');
 
 class Log {
     create(log) {
-        const sql = 'INSERT INTO logs SET ?';
+        return new Promise((resolve, reject) => {
+            const sql = 'INSERT INTO logs SET ?';
 
-        connection.query(sql, log, (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('log successful created');
-            }
+            connection.query(sql, log, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve('log successful created');
+                }
+            })
         })
     }
 }

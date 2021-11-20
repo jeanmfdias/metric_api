@@ -27,8 +27,13 @@ module.exports = app => {
             "created_at": Moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
-        Log.create(log);
-
-        return res.json(result);
+        Log.create(log)
+            .then(done => {
+                result.status = done
+                return res.status(201).json(result);
+            })
+            .catch(err => {
+                return res.status(400).json(err)
+            });
     });
 }
