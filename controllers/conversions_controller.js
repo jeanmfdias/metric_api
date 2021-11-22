@@ -1,9 +1,19 @@
 const Moment = require('moment');
+
+const ConversionService = require('../services/conversion_service');
 const Log = require('../models/logs');
 
 module.exports = app => {
-    app.post('/v1/conversion', (req, res) => {
+    app.post('/v1/conversion', async (req, res) => {
         const body = req.body;
+
+        const validate = await ConversionService.validate(body);
+        const errors = validate.filter(field => !field.valid);
+        
+        if (errors.length) {
+            return res.status(400).json(errors);
+        }
+
         let new_value = null;
         let result = {
             "status": "success",
