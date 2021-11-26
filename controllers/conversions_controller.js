@@ -7,6 +7,7 @@ module.exports = app => {
     app.post('/v1/conversion', async (req, res) => {
         const body = req.body;
 
+        // await just work inside async function with an async function
         const validate = await ConversionService.validate(body);
         const errors = validate.filter(field => !field.valid);
         
@@ -25,9 +26,11 @@ module.exports = app => {
             new_value = body.value / 1000;
         }
 
-        result.data = {
+        let data = {
             "value": new_value
         };
+
+        result = { ...result, data}
 
         let log = {
             "alias": "conversion",
