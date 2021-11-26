@@ -19,10 +19,10 @@ class Log {
         return new Promise((resolve, reject) => {
             let sql = "SELECT * FROM logs";
             if (id !== null) {
-                sql += " WHERE id = " + id;
+                sql += " WHERE id = ?";
             }
 
-            connection.query(sql, null, (err, data) => {
+            connection.query(sql, id, (err, data) => {
                 if (err) {
                     reject(err);
                 } else {
