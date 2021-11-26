@@ -2,6 +2,13 @@
 
 The conversions logs was save in mysql database.
 
+## Setup project
+
+1. `yarn install`
+2. `yarn start`
+
+And now the project will be running on port 3000.
+
 ## POST /v1/conversion
 
 ### _payload_
