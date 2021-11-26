@@ -42,6 +42,16 @@ async function validate(body) {
     return validations;
 }
 
+function normalize(data) {
+    return data.map(value => {
+        let new_value = value;
+        new_value.input = JSON.parse(new_value.input);
+        new_value.output = JSON.parse(new_value.output);
+        return new_value;
+    });
+}
+
 module.exports = {
-    validate
+    validate,
+    normalize
 };

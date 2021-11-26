@@ -11,12 +11,7 @@ module.exports = app => {
                     "status": "success",
                 };
 
-                let data = result.map(value => {
-                    let new_value = value;
-                    new_value.input = JSON.parse(new_value.input);
-                    new_value.output = JSON.parse(new_value.output);
-                    return new_value;
-                })
+                let data = ConversionService.normalize(result);
 
                 response = { ...response, data }
 
@@ -28,7 +23,25 @@ module.exports = app => {
     });
 
     app.get('/v1/conversions/:id', (req, res) => {
+        const id = req.params.id
+        Log.get(id)
+            .then(result => {
+                let response = {
+                    "status": "success",
+                };
 
+                let data = ConversionService.normalize(result)[0];
+
+                if (data != undefined) {
+                    response = { ...response, data }
+                } else {
+                    response.status = "not found";
+                }
+                return res.json(response);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
     });
 
     app.post('/v1/conversion', async (req, res) => {

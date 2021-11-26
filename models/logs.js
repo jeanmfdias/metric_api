@@ -15,9 +15,12 @@ class Log {
         });
     }
 
-    get() {
+    get(id = null) {
         return new Promise((resolve, reject) => {
-            const sql = "SELECT * FROM logs";
+            let sql = "SELECT * FROM logs";
+            if (id !== null) {
+                sql += " WHERE id = " + id;
+            }
 
             connection.query(sql, null, (err, data) => {
                 if (err) {

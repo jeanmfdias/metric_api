@@ -25,11 +25,11 @@ And now the project will be running on port 3000.
 
 ```json
 {
-  "status": "log successful created",
-  "data": {
-    "value": 25
-  },
-  "executed_at": "2021-11-26 19:23:56"
+    "status": "log successful created",
+    "data": {
+        "value": 25
+    },
+    "executed_at": "2021-11-26 19:23:56"
 }
 ```
 
@@ -39,25 +39,60 @@ And now the project will be running on port 3000.
 
 ```json
 {
-  "status": "success",
-  "data": [
-    {
-      "id": 1,
-      "alias": "conversion",
-      "value": "conversion",
-      "input": {
-        "value": 25000,
-        "unit_in": "M",
-        "unit_out": "K"
-      },
-      "output": {
-        "status": "success",
-        "data": {
-          "value": 25
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "alias": "conversion",
+            "value": "conversion",
+            "input": {
+                "value": 25000,
+                "unit_in": "M",
+                "unit_out": "K"
+            },
+            "output": {
+                "status": "success",
+                "data": {
+                    "value": 25
+                }
+            },
+            "created_at": "2021-11-20T10:14:12.000Z"
         }
-      },
-      "created_at": "2021-11-20T10:14:12.000Z"
-    }
-  ]
+    ]
+}
+```
+
+## GET /v1/conversions/:id
+
+### _response_
+
+```json
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "alias": "conversion",
+        "value": "conversion",
+        "input": {
+            "value": 25000,
+            "unit_in": "M",
+            "unit_out": "K"
+        },
+        "output": {
+            "status": "success",
+            "data": {
+                "value": 25
+            }
+        },
+        "created_at": "2021-11-20T10:14:12.000Z"
+    }   
+}
+```
+
+### _response_
+
+```json
+{
+    "status": "not found"
 }
 ```
