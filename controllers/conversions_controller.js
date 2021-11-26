@@ -23,7 +23,7 @@ module.exports = app => {
     });
 
     app.get('/v1/conversions/:id', (req, res) => {
-        const id = req.params.id
+        const id = parseInt(req.params.id)
         Log.get(id)
             .then(result => {
                 let response = {
