@@ -11,8 +11,22 @@ class Log {
                 } else {
                     resolve('log successful created');
                 }
-            })
-        })
+            });
+        });
+    }
+
+    get() {
+        return new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM logs";
+
+            connection.query(sql, null, (err, data) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
     }
 }
 

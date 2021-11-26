@@ -4,6 +4,33 @@ const ConversionService = require('../services/conversion_service');
 const Log = require('../models/logs');
 
 module.exports = app => {
+    app.get('/v1/conversions', (req, res) => {
+        Log.get()
+            .then(result => {
+                let response = {
+                    "status": "success",
+                };
+
+                let data = result.map(value => {
+                    let new_value = value;
+                    new_value.input = JSON.parse(new_value.input);
+                    new_value.output = JSON.parse(new_value.output);
+                    return new_value;
+                })
+
+                response = { ...response, data }
+
+                return res.json(response);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+    });
+
+    app.get('/v1/conversions/:id', (req, res) => {
+
+    });
+
     app.post('/v1/conversion', async (req, res) => {
         const body = req.body;
 
