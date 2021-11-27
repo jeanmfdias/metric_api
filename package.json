@@ -6,7 +6,8 @@
   "author": "jeanmfdias <jeanmfdias@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -L index.js"
+    "start": "nodemon -L index.js",
+    "debug": "nodemon --inspect index.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

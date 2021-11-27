@@ -8,7 +8,7 @@ module.exports = app => {
         Log.get()
             .then(result => {
                 let response = {
-                    "status": "success",
+                    status: "success",
                 };
 
                 let data = ConversionService.normalize(result);
@@ -27,7 +27,7 @@ module.exports = app => {
         Log.get(id)
             .then(result => {
                 let response = {
-                    "status": "success",
+                    status: "success",
                 };
 
                 let data = ConversionService.normalize(result)[0];
@@ -57,9 +57,9 @@ module.exports = app => {
 
         let new_value = null;
         let result = {
-            "status": "success",
-            "data" : "",
-            "executed_at": Moment().format('YYYY-MM-DD HH:mm:ss')
+            status: "success",
+            data: "",
+            executed_at: Moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
         if (body.unit_in == "M" && body.unit_out == "K") {
@@ -67,17 +67,17 @@ module.exports = app => {
         }
 
         let data = {
-            "value": new_value
+            value: new_value
         };
 
         result = { ...result, data}
 
         let log = {
-            "alias": "conversion",
-            "value": "conversion",
-            "input": JSON.stringify(body),
-            "output": JSON.stringify(result),
-            "created_at": Moment().format('YYYY-MM-DD HH:mm:ss')
+            alias: "conversion",
+            value: "conversion",
+            input: JSON.stringify(body),
+            output: JSON.stringify(result),
+            created_at: Moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
         Log.create(log)
